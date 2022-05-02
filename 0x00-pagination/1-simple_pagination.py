@@ -35,5 +35,7 @@ class Server:
         assert type(page) is int and type(page_size) is int
         assert page > 0 and page_size > 0
         lst = self.dataset()
-        page, page_size = index_range(page, page_size)
-        return lst[page: page_size]
+        start, end = index_range(page, page_size)
+        if start > len(lst) or end >= len(lst):
+            return []
+        return lst[start: end]
