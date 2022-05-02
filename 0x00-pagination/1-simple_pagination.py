@@ -1,7 +1,6 @@
 import csv
 import math
 from typing import List
-index_range = __import__('0-simple_helper_function').index_range
 
 
 class Server:
@@ -22,11 +21,18 @@ class Server:
             self.__dataset = dataset[1:]
 
         return self.__dataset
+    
+    def index_range(page: int, page_size: int) -> tuple:
+        ''' start to end of last index page '''
+        if page < 1 or page_size < 1:
+            return (0, 0)
+        last: int = page_size * page
+        return (last - page_size, last)
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         ''' method to return page '''
         assert type(page) is int and type(page_size) is int
         assert page > 0 and page_size > 0
         lst = self.dataset()
-        page, page_size = index_range(page, page_size)
+        page, page_size = self.index_range(page, page_size)
         return lst[page: page_size]
