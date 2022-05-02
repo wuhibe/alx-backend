@@ -59,7 +59,15 @@ class Server:
         dct['page_size'] = len(data)
         dct['page'] = page
         dct['data'] = data
-        dct['next_page'] = dct['page'] + 1
-        dct['prev_page'] = dct['page'] - 1
+        if self.get_page(page + 1, page_size) != []:
+            dct['next_page'] = dct['page'] + 1
+        else:
+            dct['next_page'] = None
+        try:
+            self.get_page(page - 1, page_size)
+        except Exception:
+            dct['prev_page'] = None
+        else:
+            dct['prev_page'] = dct['page'] - 1
         dct['total_pages'] = math.ceil((len(self.__dataset) - 1) / page_size)
         return dct
