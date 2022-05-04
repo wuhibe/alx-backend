@@ -1,17 +1,18 @@
-#!/usr/bin/env python3
-""" task 0 """
+#!/usr/bin/python3
+"""  Basic dictionary """
 from base_caching import BaseCaching
 
 
 class BasicCache(BaseCaching):
-    ''' dictionary caching system '''
+    """ Class that inherits from BaseCaching and is a caching system
+        This caching system doesnt have limit """
     def put(self, key, item):
-        ''' method to add to the dictionary '''
+        """ Assign to the dictionary """
         if key and item:
             self.cache_data[key] = item
 
     def get(self, key):
-        ''' getter method '''
-        if key is None or key not in self.cache_data.keys():
+        """ Return the value linked """
+        if key is None or self.cache_data.get(key) is None:
             return None
-        return self.cache_data[key]
+        return self.cache_data.get(key)
