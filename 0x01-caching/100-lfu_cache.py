@@ -30,11 +30,11 @@ class LFUCache(BaseCaching):
                     keys.clear()
                     least = self.lst.count(x)
                     keys.append(x)
-                elif self.lst.count(x) == least  and x != temp:
+                elif self.lst.count(x) == least and x != temp:
                     keys.append(x)
             for x in keys:
                 vl = self.store[x]
-                if vl < val  and x != temp:
+                if vl < val and x != temp:
                     val = vl
                     key = x
             print("DISCARD: {}".format(key))
