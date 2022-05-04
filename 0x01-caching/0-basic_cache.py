@@ -7,9 +7,8 @@ class BasicCache(BaseCaching):
     ''' dictionary caching system '''
     def put(self, key, item):
         ''' method to add to the dictionary '''
-        if key is None or item is None:
-            return
-        self.cache_data[key] = item
+        if key and item:
+            self.cache_data[key] = item
 
     def get(self, key):
         ''' getter method '''
