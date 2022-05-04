@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """ MRU caching """
-from django.dispatch import receiver
 from base_caching import BaseCaching
 
 
