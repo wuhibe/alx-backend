@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ MRU caching """
+from django.dispatch import receiver
 from base_caching import BaseCaching
 
 
@@ -18,14 +19,14 @@ class MRUCache(BaseCaching):
             self.store[key] = self.recent
             self.recent += 1
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-            val = 0
+            recent = 0
             # store key in temp to prevent removal
             temp = key
             # find the key with the highest recent value
             for ky in self.store:
-                vl = self.store[ky]
-                if vl > val and ky != temp:
-                    val = vl
+                rec = self.store.get(ky)
+                if rec > recent and ky != temp:
+                    recent = rec
                     key = ky
             print("DISCARD: {}".format(key))
             # remove the key from cache and store
